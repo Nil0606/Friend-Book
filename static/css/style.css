@@ -24,3 +24,12 @@ Home page
     justify-content: space-between;
     align-items: baseline;
 }
+
+/* friends page */
+.friends_container{
+    background-color: darkseagreen;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}

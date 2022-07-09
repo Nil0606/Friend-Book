@@ -117,7 +117,9 @@ class friends(View):
     def get(self, request, *args, **kwargs):
         context={}
         friends=request.user.friend_set.all()
+        friends2=request.user.is_friend_of.all()
         context["friends"]=friends
+        context["friends2"]=friends2
         return render(request,"members/friends.html",context)
 
     def post(self, request, *args, **kwargs):

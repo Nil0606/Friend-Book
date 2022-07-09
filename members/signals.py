@@ -24,7 +24,15 @@ def upadte_user(sender,instance,created, **kwargs):
         user.email=instance.email
         user.save(update_fields=['first_name','last_name','username','email'])
         
-# @receiver(post_save,sender=models.Friend)
-# def add_friend(sender,instance,created,**kwargs):
-#     if created:
-        
+@receiver(post_save,sender=models.Friend)
+def add_friend(sender,instance,created,**kwargs):
+    if created:
+        current_user=instance.current_user.memberprofile
+        current_user.friends+=1
+        current_user.save(update_fields=['friends'])
+
+@receiver(pre_delete,sender=models.Friend)
+def remove_friend(sender,instance,**kwargs):
+    current_user=instance.current_user.memberprofile
+    current_user.friends-=1
+    current_user.save(update_fields=['friends'])

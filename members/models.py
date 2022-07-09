@@ -15,6 +15,7 @@ class MemberProfile(models.Model):
     public=models.BooleanField(default=True)
     date_joined=models.DateTimeField(auto_now_add=True)
     date_updated=models.DateTimeField(auto_now=True)
+    friends=models.IntegerField(default=0)
     def __str__(self):
         return self.username
     
