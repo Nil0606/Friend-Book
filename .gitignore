@@ -1,0 +1,7 @@
+#envirounment
+.env
+venv/
+
+#django
+__pycache__/
+*.pyc

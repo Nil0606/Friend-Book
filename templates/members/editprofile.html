@@ -1,0 +1,137 @@
+{% extends '../base.html' %} {% block title %} Signup {% endblock %} 
+{% block content %} {% if is_obj %}
+<form action="/members/profile/{{obj.slug}}/edit/" enctype="multipart/form-data" class="container" method="POST">
+  {% if error %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{error}}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %} 
+  {% csrf_token %}
+  <div class="row image-upload-container">
+    <div class="col-md-2">
+      <img class="rounded-circle" src="{{obj.profile_pic.url}}" alt="profilepic" width="150px" height="150px" />
+    </div>
+    <div class="col-md-10">
+      <input
+        type="file"
+        class="form-control"
+        name="profile_pic"
+        id="profilepic"
+      />
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="firstNameInput" class="form-label">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="first_name"
+      id="firstNameInput"
+      value="{{obj.first_name}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="lastNameInput" class="form-label">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="last_name"
+      id="lastNameInput"
+      value="{{obj.last_name}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="userNameInput" class="form-label">User Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="username"
+      id="userNameInput"
+      value="{{obj.username}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="emailInput" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      id="emailInput"
+      value="{{obj.email}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="phoneNumberInput" class="form-label">Phone Number</label>
+    <input
+      type="text"
+      class="form-control"
+      name="phoneNumber"
+      id="phoneNumberInput"
+      value="{{obj.phoneNumber}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="examplebio" class="form-label">Bio</label>
+    <textarea
+      class="form-control rounded-3"
+      id="examplebio"
+      name="bio"
+      rows="5"
+    >{{obj.bio}}</textarea>
+  </div>
+  <div class="mb-3">
+    <label for="publicProfile" class="form-label me-3">Profile </label>
+    {% if obj.public %}
+    <input
+      class="form-check-input"
+      type="radio"
+      name="public"
+      id="exampleRadios1"
+      value="1"
+      checked
+    />
+    <label class="form-check-label me-1" for="exampleRadios1"> Public </label>
+    <input
+      class="form-check-input"
+      type="radio"
+      name="public"
+      id="exampleRadios1"
+      value="0"
+    />
+    <label class="form-check-label" for="exampleRadios1"> Private </label>
+    {% else %}
+    <input
+      class="form-check-input"
+      type="radio"
+      name="public"
+      id="exampleRadios1"
+      value="1"
+    />
+    <label class="form-check-label me-1" for="exampleRadios1"> Public </label>
+    <input
+      class="form-check-input"
+      type="radio"
+      name="public"
+      id="exampleRadios1"
+      value="0"
+      checked
+    />
+    <label class="form-check-label" for="exampleRadios1"> Private </label>
+    {% endif %}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% else %}
+{% if message %}
+  <h1>{{message}}</h1>
+{% else %}
+  <h1>Profile Not Found.</h1>
+{% endif %}
+
+{% endif %} {% endblock %}

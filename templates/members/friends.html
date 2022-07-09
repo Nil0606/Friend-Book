@@ -1,0 +1,23 @@
+{% extends '../base.html' %} {% block title %} Friends {% endblock %} 
+{% block content %}
+<h1>{{friends}}</h1> 
+{% for f in friends %}
+<div class="ui card">
+  <div class="image">
+    <img src="{{f.friend_user.memberprofile.profile_pic.url}}" />
+  </div>
+  <div class="content">
+    <a class="header">{{f.friend_user.username}}</a>
+    <div class="meta">
+      <span class="date">Joined in 2022</span>
+    </div>
+    <div class="description">{{f.frined_user.bio}}</div>
+  </div>
+  <div class="extra content">
+    <a>
+      <i class="user icon"></i>
+      22 Friends
+    </a>
+  </div>
+</div>
+{% endfor %} {% endblock %}

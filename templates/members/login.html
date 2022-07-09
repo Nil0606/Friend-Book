@@ -1,0 +1,30 @@
+{% extends '../base.html' %} {% block title %} Login {% endblock %} 
+{% block content %}
+<form action="/members/login/" class="container" method="POST">
+  {% if error %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{error}}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %} {% csrf_token %}
+  <div class="mb-3">
+    <label for="usernameInput" class="form-label">Username</label>
+    <input type="text" class="form-control" name="username" id="usernameInput" />
+  </div>
+  <div class="mb-3">
+    <label for="InputPassword" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      id="InputPassword"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

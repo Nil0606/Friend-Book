@@ -1,0 +1,33 @@
+{% extends '../base.html' %} {% block title %} Login {% endblock %} 
+{% block content %} {% if user.is_authenticated %}
+<div class="container main-container">
+  <div class="row">
+    <div class="col col-md-9" style="border:2px solid green;">
+      {% for post in posts %}
+        <div class="card post-card">
+        <img src="{{post.pic.url}}" class="card-img-top post-card-img" alt="aa" />
+        <div class="post-card-body card-body">
+          <h5 class="card-title post-card-owner">{{post.user.username}}</h5>
+          <p class="card-text post-card-description">
+            {{post.description}}
+          </p>
+          <div class="post-buttons-container">
+            <a href="/posts/{{post.id}}/like" class="btn btn-primary">Like</a>  
+            <a href="#">
+              <span class="badge bg-light text-primary"><i class="bi bi-hand-thumbs-up-fill"></i>{{post.likes}}</span>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+      {% endfor %}  
+      
+    </div>
+    <div class="col col-md-3" style="border:2px solid red;">
+        <div class="pos">Left Panel</div>
+    </div>
+  </div>
+</div>
+{% else %}
+<h1>Welcome Please Signup.</h1>
+{% endif %} {% endblock %}

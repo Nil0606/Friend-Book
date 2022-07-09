@@ -1,0 +1,62 @@
+{% extends '../base.html' %} {% block title %} Signup {% endblock %} 
+{% block content %}
+<form action="/members/signup/" class="container" method="POST">
+ {% if error %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{error}}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %}
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="firstNameInput" class="form-label">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="firstname"
+      id="firstNameInput"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="lastNameInput" class="form-label">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="lastname"
+      id="lastNameInput"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="userNameInput" class="form-label">User Name</label>
+    <input type="text" class="form-control" name="username" id="userName" />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInput" class="form-label">Email address</label>
+    <input type="email" class="form-control" name="email" id="emailInput" />
+  </div>
+  <div class="mb-3">
+    <label for="InputPassword1" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password1"
+      id="InputPassword1"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="password"
+      class="form-control"
+      id="InputPassword2"
+      placeholder="Type Password Again"
+      name="password2"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

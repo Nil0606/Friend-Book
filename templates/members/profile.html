@@ -1,0 +1,13 @@
+{% extends '../base.html' %} {% block title %} {{obj.user.username}} Profie {% endblock %} 
+{% block content %}
+    <img src="{{obj.profile_pic.url}}" alt="profilepic" width="150px">
+    <h3>{{obj.first_name}}</h3>
+    <h3>{{obj.last_name}}</h3>
+    <h3>{{obj.username}}</h3>
+    <h3>{{obj.email}}</h3>
+    <h3>{{obj.mobile}}</h3>
+    <h3>{{obj.bio}}</h3>
+    {% if is_owner %}
+        <a href="/members/profile/{{user.memberprofile.slug}}/edit/" class="btn btn-primary">Edit</a>
+    {% endif %}    
+{% endblock %}
