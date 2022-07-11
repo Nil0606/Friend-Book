@@ -7,7 +7,19 @@ from . import models
 def home(request):
     context={}
     if request.user.is_authenticated:
-        posts=models.Post.objects.filter(user=request.user)
+        posts=[]
+        user_posts=models.Post.objects.filter(user=request.user)
+        for post in user_posts:
+                posts.append(post)
+        
+        for friend in request.user.friend_set.all():
+            for post in friend.friend_user.post_set.all():
+                posts.append(post)
+
+        for friend in request.user.is_friend_of.all():
+            for post in friend.current_user.post_set.all():
+                posts.append(post)
+
         context['posts']=posts
     return render(request,"posts/home.html",context=context)
 

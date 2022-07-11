@@ -1,10 +1,11 @@
 {% extends '../base.html' %} {% block title %} Friends {% endblock %} 
 {% block content %}
+{%load humanize%}
 <div class="friends_container">
 {% for f in friends %}
-<div class="ui card">
+<div class="ui card friend-card">
   <div class="image">
-    <img src="{{f.friend_user.memberprofile.profile_pic.url}}" style="border-radius:50%;"/>
+    <img src="{{f.friend_user.memberprofile.profile_pic.url}}"/>
   </div>
   <div class="content">
     <a class="header">{{f.friend_user.username}}</a>
@@ -22,14 +23,14 @@
 </div>
 {% endfor %}
 {% for f in friends2 %}
-<div class="ui card">
+<div class="ui card friend-card">
   <div class="image">
-    <img src="{{f.current_user.memberprofile.profile_pic.url}}" />
+    <img src="{{f.current_user.memberprofile.profile_pic.url}}"/>
   </div>
   <div class="content">
     <a class="header">{{f.current_user.username}}</a>
     <div class="meta">
-      <span class="date">Joined in {{f.current_user.memberprofile.date_joined|date:"M Y"}}</span>
+      <span class="date">Joined in {{f.current_user.memberprofile.date_joined|naturalday}}</span>
     </div>
     <div class="description">{{f.current_user.bio}}</div>
   </div>

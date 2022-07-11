@@ -16,5 +16,9 @@ class Like(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
 
 
-# class Comments(models.Model):
-    
+class Comment(models.Model):
+    post=models.ForeignKey(Post,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    created=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now=True)
+    description=models.TextField()  
