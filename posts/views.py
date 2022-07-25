@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.views import View
 from . import models
 
 def home(request):
@@ -32,3 +33,9 @@ def like(request,pk):
         likeObj=models.Like(post=post,user=request.user)
         likeObj.save()
     return redirect("/home/")
+
+class add(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('GET request!')
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('POST request!')

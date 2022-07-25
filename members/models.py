@@ -1,6 +1,6 @@
+from django.db.models import Q
 from django.db import models
 from django.contrib.auth.models import User
-
 
 class MemberProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -22,6 +22,10 @@ class MemberProfile(models.Model):
 class Friend(models.Model):
     current_user=models.ForeignKey(User,on_delete=models.CASCADE)
     friend_user=models.ForeignKey(User,related_name="is_friend_of", on_delete=models.CASCADE)
+    
+    @classmethod
+    def get_friends(user):
+        return Friend.objects.all().filter(Q(current_user=user)|Q(friend_user=user))
     
     def __str__(self) -> str:
         return self.current_user.username+" is friend of "+self.friend_user.username

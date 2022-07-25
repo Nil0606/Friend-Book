@@ -1,7 +1,44 @@
 {% extends '../base.html' %} {% block title %} Signup {% endblock %} 
 {% block content %}
-<form action="/members/signup/" class="container" method="POST">
- {% if error %}
+<div class="ui padded text container segment">
+  <h1>Signup</h1>
+  {% if error %}
+  <div class="ui warning message">
+    <i class="close icon"></i>
+    <div class="header">
+    {{ error }}
+    </div>
+  </div>
+  {% endif %}
+  <form class="ui form" action="/members/signup" method="POST">
+    {% csrf_token %}
+  <div class="field">
+    <label>First Name</label>
+    <input type="text" name="firstname" placeholder="First Name">
+  </div>
+  <div class="field">
+    <label>Last Name</label>
+    <input type="text" name="lastname" placeholder="Last Name">
+  </div>
+  <div class="field">
+    <label>User Name</label>
+    <input type="text" name="username" placeholder="User Name">
+  </div>
+  <div class="field">
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Email">
+  </div>
+  <div class="field">
+    <label>Password</label>
+    <input type="password" name="password1" placeholder="Password">
+  </div>
+  <div class="field">
+    <input type="password" name="password2" placeholder="Enter Password Again">
+  </div>
+  <button class="ui button" type="submit">Signup</button>
+</form>
+
+ <!-- {% if error %}
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     {{error}}
     <button
@@ -57,6 +94,7 @@
       name="password2"
     />
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-{% endblock %}
+  <button type="submit" class="btn btn-primary">Submit</button> -->
+
+</div>
+  {% endblock %}

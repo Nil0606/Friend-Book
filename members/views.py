@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout  
+from django.contrib.auth import authenticate,login,logout
+
+from posts import views  
 from . import models
 from django.template.defaultfilters import slugify
 
@@ -124,3 +126,5 @@ class friends(View):
 
     def post(self, request, *args, **kwargs):
         return HttpResponse('POST request!')
+
+

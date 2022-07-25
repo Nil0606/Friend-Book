@@ -1,8 +1,54 @@
 {% extends '../base.html' %} {% block title %} Friends {% endblock %} 
 {% block content %}
 {%load humanize%}
-<div class="friends_container">
-{% for f in friends %}
+<h2 class="ui green center aligned icon header">
+  <i class="circular users icon"></i>
+  Friends
+</h2>
+<div class="friends-container">
+  {% for f in friends %}
+  <div class="ui card friend-card">
+    <div class="image">
+      <img src="{{f.friend_user.memberprofile.profile_pic.url}}" />
+    </div>
+    <div class="content">
+      <a class="header">{{f.friend_user.username}}</a>
+      <div class="meta">
+        <span class="date">
+          Joined in {{f.friend_user.memberprofile.date_joined|date:"M Y"}}
+        </span>
+      </div>
+      <div class="description">{{f.friend_user.bio}}</div>
+    </div>
+    <div class="extra content">
+      <a>
+        <i class="user icon"></i>
+        {{f.friend_user.memberprofile.friends}} Friends
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+  {% for f in friends2 %}
+  <div class="ui card friend-card">
+    <div class="image">
+      <img src="{{f.current_user.memberprofile.profile_pic.url}}"/>
+    </div>
+    <div class="content">
+      <a class="header">{{f.current_user.username}}</a>
+      <div class="meta">
+        <span class="date">Joined in {{f.current_user.memberprofile.date_joined|naturalday}}</span>
+      </div>
+      <div class="description">{{f.current_user.bio}}</div>
+    </div>
+    <div class="extra content">
+      <a>
+        <i class="user icon"></i>
+        {{f.current_user.memberprofile.friends}} Friends
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+  <!-- {% for f in friends %}
 <div class="ui card friend-card">
   <div class="image">
     <img src="{{f.friend_user.memberprofile.profile_pic.url}}"/>
@@ -41,7 +87,7 @@
     </a>
   </div>
 </div>
-{% endfor %}
+{% endfor %} -->
 </div>
 
 {% endblock %}

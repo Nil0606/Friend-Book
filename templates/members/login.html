@@ -1,30 +1,27 @@
 {% extends '../base.html' %} {% block title %} Login {% endblock %} 
 {% block content %}
-<form action="/members/login/" class="container" method="POST">
+<div class="ui padded text container segment">
+  <h1>Login</h1>
   {% if error %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{error}}
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
+  <div class="ui warning message">
+    <i class="close icon"></i>
+    <div class="header">
+    {{ error }}
+    </div>
   </div>
-  {% endif %} {% csrf_token %}
-  <div class="mb-3">
-    <label for="usernameInput" class="form-label">Username</label>
-    <input type="text" class="form-control" name="username" id="usernameInput" />
-  </div>
-  <div class="mb-3">
-    <label for="InputPassword" class="form-label">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      name="password"
-      id="InputPassword"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  {% endif %}
+    <form class="ui form" action="/members/login/" method="POST">
+    {% csrf_token %}
+      <div class="field">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Username" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password" />
+      </div>
+      <button class="ui button" type="submit">Login</button>
+    </form>
+</div>
+
 {% endblock %}

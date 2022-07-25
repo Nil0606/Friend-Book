@@ -1,32 +1,45 @@
 {% extends '../base.html' %} {% block title %} Login {% endblock %} 
 {% block content %} {% if user.is_authenticated %}
-<div class="container main-container">
-  <div class="row">
-    <div class="col col-md-9" style="border:2px solid green;">
+   <div class="ui stackable two column grid">
+    <div class="twelve wide column">
       {% for post in posts %}
-        <div class="card post-card">
-        <img src="{{post.pic.url}}" class="card-img-top post-card-img" alt="aa" />
-        <div class="post-card-body card-body">
-          <h5 class="card-title post-card-owner">{{post.user.username}}</h5>
-          <p class="card-text post-card-description">
-            {{post.description}}
-          </p>
-          <div class="post-buttons-container">
-            <a href="/posts/{{post.id}}/like" class="btn btn-primary">Like</a>  
-            <a href="#">
-              <span class="badge bg-light text-primary"><i class="bi bi-hand-thumbs-up-fill"></i>{{post.likes}}</span>
-            </a>
+      <div class="ui card post-card">
+        <div class="content">
+          <div class="right floated meta">{{post.created|timesince}} ago</div>
+          <img
+            class="ui avatar image"
+            src="{{post.user.memberprofile.profile_pic.url}}"
+          />{{post.user.username}}
+        </div>
+        <div class="image">
+          <img src="{{post.pic.url}}" />
+        </div>
+        <div class="content">
+          <span class="right floated">
+            <a href="/posts/{{post.id}}/like"
+              ><i class="heart outline like icon"></i
+            ></a>
+            {{post.likes}}
+          </span>
+          <i class="comment icon"></i>
+          3 comments
+        </div>
+        <div class="extra content">
+          <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment..." />
           </div>
-          
         </div>
       </div>
-      {% endfor %} 
+      {% endfor %}
     </div>
-    <div class="col col-md-3" style="border:2px solid red;">
-        <div class="pos">Left Panel</div>
+    <div class="four wide column">
+      <div class="button-container">
+          <a class="ui primary button" href="/posts/add/"><i class="plus icon"></i> Add Post</a>
+      </div>
     </div>
   </div>
-</div>
+
 {% else %}
 <h1>Welcome Please Signup.</h1>
 {% endif %} {% endblock %}
