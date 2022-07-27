@@ -1,9 +1,38 @@
 {% extends '../base.html' %} {% block title %} Search {% endblock %} 
 {% block content %}
-<form class="ui form">
-  <div class="field">
-    <input type="text" name="first-name" placeholder="search">
+<div class="ui padded text container segment">
+  <form action="/search/" class="ui form" method="POST">
+  <div class="two fields">
+    {% csrf_token %}
+    <input type="text" name="query" style="margin-right:0.5rem !important;" placeholder="search"/>
+    <button class="ui button" type="submit"><i class="search icon"></i></button>
+  </div> 
+  </form>
+  {% if results %}
+  <div class="ui items">
+  {% for user in results %}
+  <div class="item">
+    <div class="ui small image">
+      <img src={{user.memberprofile.profile_pic.url}}>
+    </div>
+    <div class="middle aligned content">
+      <div class="header">
+        {{user.username}}
+      </div>
+      <div class="description">
+        <p></p>
+      </div>
+      <div class="extra">
+        <div class="ui right floated button">
+          Add Friend
+        </div>
+      </div>
+    </div>
   </div>
-<form class="ui form">
-    
+  {% endfor %}
+  
+</div>
+  {% endif %}
+</div>
+
 {% endblock %}

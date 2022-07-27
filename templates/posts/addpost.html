@@ -1,0 +1,35 @@
+{% extends '../base.html' %} {% block title %} Add Post {% endblock %} 
+{% block content %}
+<div class="ui padded text container segment">
+  <h1>Add Post</h1>
+  {% if message_positive %}
+  <div class="ui positive message">
+  <i class="close icon"></i>
+  <div class="header">
+    {{message_positive}}
+  </div>
+ </div>
+  {% endif %}  
+  {% if message_negative %}
+  <div class="ui warning message">
+    <i class="close icon"></i>
+    <div class="header">
+    {{ message_negative }} 
+    </div>
+  </div>
+  {% endif %}
+    <form class="ui form" action="/posts/add/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="field">
+        <label>Image</label>
+        <input type="file" name="pic" id="">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea name="description" cols="30" rows="10"></textarea>
+      </div>
+      <button class="ui button" type="submit">Add</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -4,6 +4,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 from . import models
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 def home(request):
     context={}
@@ -36,6 +38,26 @@ def like(request,pk):
 
 class add(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse('GET request!')
+        return render(request,"posts/addpost.html")
     def post(self, request, *args, **kwargs):
-        return HttpResponse('POST request!')
+        context={}
+        description=request.POST.get('description')
+        pic=request.FILES.get('pic')
+        post=models.Post(user=request.user,description=description,pic=pic)
+        post.save()
+        message_positive="Post is created."
+        context["message_positive"]=message_positive
+        print(context)
+        return render(request,"posts/addpost.html",context)
+
+class search(View):
+    def get(self, request, *args, **kwargs):
+        return render(request,"posts/search.html")
+
+    def post(self, request, *args, **kwargs):
+        context={}
+        Query=request.POST.get('query')
+        results=User.objects.filter(Q(first_name__startswith=Query) | Q(username__startswith=Query))
+        print(results)
+        context["results"]=results
+        return render(request,"posts/search.html",context=context)

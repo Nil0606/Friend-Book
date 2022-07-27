@@ -22,6 +22,7 @@
         {% if user.is_authenticated %}
         <a class="item" href="/members/profile/{{user.memberprofile.slug}}/"> Profile </a>
         <a class="item" href="/members/profile/{{user.memberprofile.slug}}/friends"> Friends </a>
+        <a class="item" href="/search/"> Search </a>
         {% else %}
         <a class="item" href="/members/signup/"> Signup </a>
         <a class="item" href="/members/login/"> Login </a>
